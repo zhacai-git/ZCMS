@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/externalPages.css">
+</head>
+<body>
+    <div id="external">
+        <div class="title">本站技术解析-JS部分</div>
+        <div class="contentDivider"></div>
+        <div class="content">
+            <p>这部分是本站技术解析-JS部分，该部分涉及内容众多，具体JS内容可直接查看Javascript文件配合本文理解。目前还在在线开发阶段，可能会有大段的注释代码，请注意分辨。</p>
+            <p>本站涉及到了5个主要Js文件，分别为index.js、detect.js、externalPages.js、vue.js。还有iview.js由于基本未使用不做介绍。下面是各个js分别的简短介绍。</p>
+            <p>index.js：为本站核心，包含了setHeight函数、realtime函数、dynamicChangeHeight函数、intercept函数、get函数。包含了多个vue组件:apppost（文章列表）、postControl（文章详情页）、pageControl（页面显示控件），这些内容会在下面详细介绍。</p>
+            <p>setHeight函数：关键函数，确保了中间部分左右两栏高度一致，函数头：function setHeight(mode,Arg1,Arg2,idOne,idTwo)，mode解释：mode 0 以id为根据调整 mode 1 以绝对高度指定，后两参数必填 mode 2 单方调整，与sidebar高度做比。其他参数按mode值按需传递从而分别实现对应功能。</p>
+            <p>realtime函数：debug用，显示三个vue控件的显示状态。</p>
+            <p>dynamicChangeHeight函数：动态按需调用setHeight函数，保证显示正常。</p>
+            <p>intercept函数：目前作用为拦截pageId，调用页面控件动作。</p>
+            <p>get函数：本站地址栏传参实现核心，有参考代码。解析地址栏问号后指定变量的值并返回。</p>
+            <p>下面是vue控件介绍：</p>
+            <p>apppost文章列表控件：此控件应该改为listControl，但因时间原因代码更改不便便保留了下来。这个控件主要是控制主页的文章列表的渲染，data内posts数组存储了要显示的内容，通过两个版本的迭代，现在可以在js内通过fetch获取json内容再赋值到posts里，通过HTML绑定的内容利用v-for进行列表渲染文章列表。</p>
+            <p>postControl文章详情页控件：data内posts获取内容的方式同上，两个method:Openpost获取文章详情内容，调用showPost来完成详情的显示。</p>
+            <p>pageControl页面控件：主要控制页面显示区的显示与否，主要功能为一个methods：openPage调用JQuery调用外部指定页面，覆盖页面指定DOM达成显示效果。</p>
+            <p>vue部分基本就这些，不是很多，主要是一个流程的逻辑问题需要注意。</p>
+            <p>剩下的function就是两个，一个显示时间，一个做跑马灯效果，技术水平不高，在此不再赘述了。</p>
+            <p>下面是其他js文件的介绍。</p>
+            <p>detect.js：项目地址：<a href="https://github.com/darcyclarke/Detect.js/" target="_blank">https://github.com/darcyclarke/Detect.js/</a>此脚本的功能为通过一系列正则表达式来对userAgent进行解析提取，方便我们进行识别。此脚本配合externalPages.js使用，主要用处为多浏览器兼容。</p>
+            <p>externalPages.js：此脚本专门为外部页面调整高度使用，调用detect.js相关功能识别浏览器，从而调整不同高度（不知道为什么Chrome和Firefox脚本获取的offsetHeight会差好多）</p>
+            <p>vue.js：不多介绍，vue框架js文件，网站核心。</p>
+            <p>JS部分讲完了，接下来请移步：<a href="?pageId=6">本站技术解析-网站结构</a></p>
+        </div>
+    </div>
+</body>
+<style>
+    .content{
+    position: relative;
+    text-indent: 2em;
+    font-size: 25px;
+    margin: 0 15px 100px 15px;
+    }
+</style>
+<script>
+    document.title = '刘祚先的个人博客-本站技术解析-JS部分'
+    externalSetHeight();
+</script>
+<script src="../../js/detect.js"></script>
+<script src="../../js/externalPages.js"></script>
+</html>

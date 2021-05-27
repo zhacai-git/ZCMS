@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>刘祚先的个人博客-首页</title>
+    <!-- 引入Vue(开发版) -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="./css/iview.css">
+    <!-- 引入组件库 -->
+    <script src="./js/iview.min.js"></script>
+    <!-- 引入JQuery -->
+    <script src="./js/jquery-3.6.0.js"></script>
+</head>
+<body onload="intercept()" onresize="dynamicChangeHeight()">
+    <div class="index">
+    <div class="DisplayArea">
+        <div class="header">
+            <p id="headertext"><a href="./" style="color: #333;">刘祚先的个人博客</a></p>
+            <div id="Pmd"></div>
+            <div id="clockDate"></div>
+        </div>
+        <div class="topMenuBar">
+            <!-- 下拉栏 Vue方式，存在问题 -->
+            <!-- <div class="menuItem" id="dropDownRender" v-on:mouseover="showList" v-on:mouseout="foldList">
+                <a href="">本站技术解析</a>
+                <ul class="dropItem">
+                    <li v-if="show" v-for="item in drops":key="item.content">
+                        <a id="dropDownItem" :href="'?pageId='+item.id">{{item.content}}</a>
+                    </li>
+                </ul>
+            </div> -->
+            <!-- 下拉栏 CSS方式,正常 -->
+            <div class="menuItem">
+                <div class="dropDown">
+                    <a id="toggleShow">本站技术解析</a><img id="downArrow" src="./img/downArrow.svg" height="20px" width="20px" alt="">
+                    <ul class="dropDownContent">
+                        <li id="dropDownContent"><a href="?pageId=3&cl=0">HTML部分</a></li>
+                        <li id="dropDownContent"><a href="?pageId=4&cl=0">CSS部分</a></li>
+                        <li id="dropDownContent"><a href="?pageId=5&cl=0">JS部分</a></li>
+                        <li id="dropDownContent"><a href="?pageId=6&cl=0">网站结构</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menuItem"><a href="?pageId=2&cl=0">分站</a></div>
+            <div class="menuItem"><a href="?pageId=1&cl=0">关于我</a></div>
+            <div class="menuItem"><a href="./">首页</a></div>
+        </div>
+        <div class="sidebar" id="sidebarh">
+            <div class="authorAvatar"><img id="avatar" src="./img/avater.jpg" alt="头像" height="100px" width="100px"></div>
+            <div class="basicInfo">
+                <!-- <p>站长基本信息：</p> -->
+                <p id="authorIntro">本站编写者:</p><br>
+                <p>NCUT大一学生,计算机专业</p><br>
+                <p>更多信息请点击 <a href="?pageId=1&cl=0" style="color: #333 !important;">关于我</a> 页面</p>
+            </div>
+        </div>
+        <!-- 此处内容区为Vue渲染，内容详见index.js -->
+        <div v-if="listShow" class="contentList" id="contenth">
+                <div v-for="post in posts":key="post.id" class="postsRender">
+                    <p class="postTitle"><a class="postAColor" :href="'?postId='+post.id" >{{post.title}}</a></p><br>
+                    <p class="postBrief">{{post.briefcon}}</p>
+                </div>
+        </div>
+        <!-- 文章详情区 -->
+        <div v-if="show" class="postContent" id="postArea" >
+            <div class="postShowTitle">{{showTitle}}</div>
+            <div class="contentDivider"></div>   
+            <!-- 标题与内容分隔栏 -->
+            <div class="postShowContent" v-html="showContent">{{showContent}}</div>
+            <div class="returnLink"><a class="ReturnAColor" href="./">返回首页</a></div>
+        </div>
+        <!-- 预留的多页面显示区 -->
+        <div v-if="show" class="pageContent" id="pageDisplay"></div>
+        <div class="footer">
+            <p id="footercontent">©️刘祚先的个人博客 版权所有 <a target="_blank" href="https://beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"> 
+                <img class="img" style="border: 0;" src="./img/beian.png" alt>京ICP备2020032291号-1
+            </a></p>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- 引入首页js -->
+<script src="./js/index.js"></script>
+<script src="./js/externalPages.js" defer="true"></script>
+<script src="./js/detect.js"></script>
+<script>setInterval(clock,1000);</script>
+<script>setInterval(Scroll,300)</script>
+</html>

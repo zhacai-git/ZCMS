@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/externalPages.css">
+</head>
+<body>
+    <div id="external">
+        <div class="title"><p>本站技术解析-CSS部分</p></div>
+    <div class="contentDivider"></div>
+    <div class="content">
+        <p>这部分是本站技术解析的CSS部分，该部分涉及内容众多，具体CSS内容可直接查看CSS文件配合本文理解。</p>
+        <p>本站CSS为一个核心文件以及多个分文件组成，核心文件index.css:首页用的样式表，externalPages.css:各个分页面的样式表，iview.css：这个是iview控件的CSS文件，用处不是很大。</p>
+        <p>其他页面的CSS文件不是很复杂，本文章主要写index.css文件的内容以及效果解析。</p>
+        <p>首先是index类，即首页整个容器所在，做了一个padding即内边距10px，使得各个元素不会紧贴页面边缘，加强了美观。</p>
+        <p>header类，即标题栏，设置了一个70px的高度，下外边距20px，position:ralative属性使得内部元素能够正确排列。</p>
+        <p>header其中有headertext,Pmd,clockDate的id用以控制其中元素显示位置，这方面较为简单，不再展开。</p>
+        <p>再往下就是导航栏，该元素高度为50px，下外边距10px，颜色为#eeeeee，加了一个边缘圆滑10px，使其变成圆角效果。</p>
+        <p>导航栏内元素向右浮动，所有文字居右，右外边距10px</p>
+        <p>导航栏下拉栏的实现方法：利用了CSS的hover状态，将原来0px的高度化为160px高度，再利用transition方法转化这两种状态实现下拉栏的动态显示，同时增加了一个z-index=9999，这是为了避免因为vue渲染元素挡住下拉栏，这在之前试验的时候出现过，这会导致下拉栏被挡住无法使用。</p>
+        <p>下拉栏旁边的图片做了一个90度的旋转，将右箭头变成了下箭头，找不到好的素材只能这么用了。</p>
+        <p>再下面的内容就是一些具体的设置，在此不再赘述。</p>
+        <p>接下来是侧边栏。侧边栏宽270px，左、下外边距10px，又一个宽2px的与background-color同色的边框，和宽3px，发散2px的阴影，增加立体感。float:right属性确保了元素位置。侧边栏高度是动态自动设置的，这部分在技术解析JS部分会讲到。</p>
+        <p>其下的内容使一些侧边栏内容的一些设置，在此不再赘述。</p>
+        <p>接下来是左侧的内容区域，其中有三个div，但是每次只会显示一个，这个细节在HTML与JS部分有提及，可以自行跳转查看。三个div的所有内容都是一致的，用以保证视觉效果统一。内容区域有一个右外边距为280px用以水平双栏布局。</p>
+        <p>其下主要是一些三个div的分别的一些设置，在此不再赘述。
+        </p>
+        <p>接下来是页脚，页脚的属性有：上外边距为10px，高度为100px，文字居中对齐，使得相关信息能够正确显示。</p>
+        <p>CSS部分讲完了，接下来请移步:<a href="?pageId=5">本站技术解析-JS部分</a></p>
+    </div>
+    </div>
+</body>
+<style>
+    .content{
+    position: relative;
+    text-indent: 2em;
+    font-size: 25px;
+    margin: 0 15px 100px 15px;
+    }
+</style>
+<script>
+    document.title = '刘祚先的个人博客-本站技术解析-CSS部分'
+    externalSetHeight();
+</script>
+<script src="../../js/detect.js"></script>
+<script src="../../js/externalPages.js"></script>
+</html>

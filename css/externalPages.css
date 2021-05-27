@@ -1,0 +1,28 @@
+#external{
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+.title{
+    margin: 10px 0 10px 20px;
+    font-size: 40px;
+}
+.contentDivider{
+    height: 3px;
+    margin: 5px 10px 15px 10px;
+    background-color: #eeeeee;
+}
+
+.content{
+    position: relative;
+    text-indent: 2em;
+    font-size: 25px;
+    margin: 0 15px 100px 15px;
+}
+
+.Introducecontent{
+    position: relative;
+    text-indent: 2em;
+    font-size: 25px;
+    margin: 0 15px 100px 15px;
+}
