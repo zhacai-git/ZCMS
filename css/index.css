@@ -1,17 +1,22 @@
 .index{
-    
     padding: 30px 0 30px 0;
 }
 body{
     background-color: #eeeeee !important;
+    min-width: 1459px;
 }
+
+.darkmode-toggle{
+    z-index: 5;
+}
+
 .DisplayArea{
     background-color:#f5f5f5;
     padding: 10px 10px 10px 10px;
     overflow: hidden;
     /* font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; */
     font-family: "微软雅黑";
-    margin: 0 300px 0 300px;
+    margin: 0 15.5% 0 15.5%;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 40px rgb(0 0 0 / 10%);
 }
@@ -23,11 +28,20 @@ body{
     margin: 0 0 20px 0;
     position: relative;
 }
+
+.darkmode--activated .header{
+    color: white;
+}
+
 #headertext{
     display: block;
     float: left;
     font-size: 40px;
     margin: 20px 0 40px 20px;
+    color: #333 !important;
+}
+.darkmode--activated #headertext{
+    color: white !important;
 }
 /* 跑马灯样式 */
 #Pmd{
@@ -47,7 +61,6 @@ body{
 }
 
 
-
 .topMenuBar{
     height: 50px;
     /* border: 2px solid red; */
@@ -56,12 +69,26 @@ body{
     box-shadow: 0 0 40px rgb(0 0 0 / 10%);
     border-radius: 10px 10px 10px 10px;
     color: #333 !important;
-    
+    position: relative;
+    /* padding-right: 400px; */
+}
+
+.darkmode--activated .topMenuBar{
+    background-color: #000;
+}
+
+.navigationMenu{
+    position: absolute;
+    right: 10px;
+    /* display: inline; */
+    /* margin-left: 30px; */
+    padding: 3px 0 10px 0;
 }
 
 .menuItem{
     font-size: 30px;
-    float: right;
+    position: relative;
+    float: left;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -78,10 +105,15 @@ body{
     z-index: 9999;
     transition: all 0.5s;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 2px;
     /* box-shadow: 0 0 40px rgb(0 0 0 / 10%); */
     border-radius: 0px 0px 10px 10px;
 }
+
+.darkmode--activated .dropDownContent{
+    background-color: #000;
+}
+
 #dropDownContent{
     display: block;
     /* border: 1px solid black; */
@@ -95,11 +127,14 @@ body{
 #downArrow{
     -webkit-transform:rotate(90deg);
 }
+
+.darkmode--activated #downArrow{
+    filter: invert(100%);
+}
 /* 
 .topMenuBar > .dropDown:hover .dropDownContent{
     height: 200px;
 } */
-
 
 .dropDown{
     position: relative;
@@ -124,6 +159,12 @@ body{
     /* box-shadow: 3px 3px 2px #9ea7b4; */
     border-radius: 10px 10px 10px 10px;
 }
+
+.darkmode--activated .sidebar{
+    background-color: black;
+}
+
+
 .authorAvatar{
     margin: 60px 85px 30px 85px;
 }
@@ -136,10 +177,18 @@ body{
     font-size: 25px !important;
 }
 
+.darkmode--activated #authorIntro{
+    color: white;
+}
+
 .basicInfo{
     text-align: center;
     margin-bottom: 20px;
     color: #333;
+}
+
+.darkmode--activated .basicInfo{
+    color: white;
 }
 
 
@@ -152,6 +201,7 @@ body{
 .contentList{
     margin: 0 280px 0 auto;
     /* padding-top: 20px; */
+    padding-bottom: 0;
     position: relative;
     /* float: right; */
     /* border: 2px solid green; */
@@ -162,6 +212,36 @@ body{
     /* border-radius: 10px 10px 10px 10px; */
     /* background-color: white; */
     z-index: 1;
+}
+
+.contentList .continueReading{
+    /* position: absolute; */
+    position: relative;
+    font-size: 17px;
+    /* float: right; */
+    font-weight: 600;
+    /* top: 90px; */
+    right: 0;
+    padding: 10px 35px 10px 35px;
+    margin: -20px 0 -20px 80%;
+    transition: all 0.3s;
+    border-radius: 30px 0 0 0;
+    border-left: 10px solid #32c1fb;
+    border-top: 10px solid #8c53ff; 
+}
+
+.continueReading a{
+    display: block;
+    color: #333 !important; 
+    margin: 0 -10px 0 0;
+}
+
+.continueReading:hover{
+    margin: -20px 0 -20px 78%;
+}
+
+.darkmode--activated .continueReading a{
+    color: white !important;
 }
 
 .postContent{
@@ -178,17 +258,28 @@ body{
     z-index: 1;
 }
 
+.darkmode--activated .postContent{
+    background-color: #000;
+}
+
 .postsRender{
     box-shadow: 0 0 40px rgb(0 0 0 / 10%);
     padding-top: 10px;
     /* background-color: #f1f1f1; */
     background-color: rgb(255,255,255);
-    margin: 10px 10px 20px;
+    margin: 10px 10px 20px 0px;
     border-radius: 10px 10px 10px 10px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+}
+
+.darkmode--activated .postsRender{
+    background-color: #000;
+    box-shadow: 0 0 40px rgb(0 0 0 / 10%);
 }
 
 .postTitle{
+    font-weight: 500;
+    margin-top: 20px;
     margin-left: 30px;
     display: block;
     font-size: 40px;
@@ -197,10 +288,18 @@ body{
     color: #333 !important;
 }
 
+.darkmode--activated .postAColor{
+    color: white !important;
+}
+
 .postBrief{
     margin-left: 70px;
     display: block;
     font-size: 20px;
+}
+
+.darkmode--activated .postBrief{
+    color: rgba(255, 255, 255, 0.726);
 }
 
 .pageContent{
@@ -209,12 +308,18 @@ body{
     overflow: hidden;
     /* float: right; */
     /* border: 2px solid green; */
+    /* height: 375px; */
     background-color: rgb(255,255,255); 
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 40px rgb(0 0 0 / 10%);
     width: auto;
     color: #393e46;
     z-index: 1;
+}
+
+.darkmode--activated .pageContent{
+    background-color: black;
+    color: white;
 }
 
 .footer{
@@ -236,6 +341,15 @@ body{
     margin-left: 20px;
     margin-top: 10px;
 }
+
+.darkmode--activated .postShowTitle{
+    color: white;
+}
+
+.darkmode--activated .postShowContent{
+    color: white;
+}
+
 .contentDivider{
     background-color: #e3e8ee;
     height: 2px;

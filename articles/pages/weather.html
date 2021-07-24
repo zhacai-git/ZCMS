@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Expires" content="180">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-control" content="no-cache">
+  <meta http-equiv="Cache" content="no-cache">
+  <title>Document</title>
+</head>
+<body>
+    <div id="external">
+        <p style="text-indent: 2em;font-size: 25px;margin-top: 10px;">中国气象局实时雷达反射率图。地区：北京，雷达站：大兴</p>
+        <img id="radarImg" src="http://dev.lzxweb.com/ZCMS/img/weather/radar.png" alt="" style="margin-left: 90px;">
+        <!-- <p style="text-indent: 2em;font-size: 25px;">对于我这种Python几乎零基础的人，写爬虫真的是太折磨了，太不容易了。</p> -->
+        <p style="text-indent: 2em;font-size: 25px;margin-top: 10px;">每日全国降水量预报图:</p>
+        <img id="rainImg" src="http://dev.lzxweb.com/ZCMS/img/weather/img/weather/broadcast.jpg" alt="" style="margin-left: 90px;margin-bottom: 20px;" width="640px" height="480px">
+    </div>
+</body>
+<style>
+.content{
+    display: block;
+    position: relative;
+    text-indent: 2em;
+    font-size: 25px;
+    margin: 0 15px 100px 15px;
+}
+</style>
+<script>
+  document.title = '刘祚先的个人博客-天气'
+  // externalSetHeight();
+  setHeight(2,'pageDisplay','',1100 + "px",'')
+  $("#radarImg").attr('src', src="/ZCMS/img/weather/radar.png"+"?t=" + Math.random());
+  $("#rainImg").attr('src', src="/ZCMS/img/weather/broadcast.jpg"+"?t=" + Math.random());
+</script>
+<script src="/ZCMS/js/detect.js"></script>
+<script src="/ZCMS/js/externalPages.js"></script>
+</html>

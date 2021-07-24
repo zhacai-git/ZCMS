@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/externalPages.css">
+    <link rel="stylesheet" href="/ZCMS/css/externalPages.css">
 </head>
 <body>
     <div id="external">
@@ -14,15 +14,18 @@
             <p>关于站长</p>
         </div>
         <div class="contentDivider"></div>
-        <img src="../../img/avater.jpg" alt="头像" height="70px" width="70px" style="border-radius: 100%;margin: 5px 0 10px 2em;">
+        <img src="/ZCMS/img/avater.jpg" alt="头像" height="70px" width="70px" style="border-radius: 100%;margin: 5px 0 10px 60px;" class="ContentAvatar">
         <div class="Introducecontent">
             <p>这个是我的的头像，一个cs1.6的表情包，感觉非常有趣。图片加了圆角效果，如果想要正方形的可以右键下载自取。</p>
             <p>我是刘祚先，来自北京，目前在NCUT即北方工业大学读大一，计算机专业。</p>
+            <p>喜欢 <span style="text-decoration: line-through;">唱、跳，rap</span> 开车（物理），宅，折腾些有的没的的电子小物件，磨一些代码。目前在自学前端，这个网站就是目前我能尽我所学做出来的成品。</p>
             <p>本站是大一下学期课程WEB应用与设计的期末大作业作品，正在按开发计划完善中，开发过程中的心得和一些吐槽可以详见首页第二篇文章。</p>
             <p>简单来讲，开发这个网站，我第一次接触了Vue、JQuery这些优秀的网页框架，使我整个开发过程简单了不少。</p>
             <p>开发这个网站同时也加深了我对于CSS的运用，CSS也不再是一个难用的东西了，虽然这玩意抽起风来简直不是我能控制的。</p>
             <p>开发本站的过程中遇到了很多的BUG，这在开发日志中得到了很充分的体现，不过好在耐心充分，大部分问题都能得到很好的解决，方法总比问题多。</p>
-            <p>就在编写本页面的过程中，就遇到了一个外部页面调用的高度获取不正确的问题，小BUG，顺手解决了，加了一个50px的偏移量，整体显示就正常了。</p>
+            <p>BUG真的超级多！网站基本上每更新一个功能都会连带一堆BUG，将这些BUG一个一个解决之后才能上线。所以一个新功能通常要花费一到两天才能正常上线。详见开发日志。</p>
+            <!-- <p>就在编写本页面的过程中，就遇到了一个外部页面调用的高度获取不正确的问题，小BUG，顺手解决了，加了一个50px的偏移量，整体显示就正常了。（这段注释掉是因为这个问题根本就没有彻底解决，傻了）
+            </p> -->
         </div>
     </div>
 </body>
@@ -48,6 +51,6 @@
     document.title = '刘祚先的个人博客-关于我'
     externalSetHeight();
 </script>
-<script src="../../js/detect.js"></script>
-<script src="../../js/externalPages.js"></script>
+<script src="/ZCMS/js/detect.js"></script>
+<script src="/ZCMS/js/externalPages.js"></script>
 </html>

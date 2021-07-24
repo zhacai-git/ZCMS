@@ -1,16 +1,6 @@
 //使侧边栏与内容栏div高度相同,同时利用传入参数判断是否进行拦截postId解析动作，解析id优先级高于页面调整
 function setHeight(mode,Arg1,Arg2,idOne,idTwo) {//mode 0 以id为根据调整 mode 1 以绝对高度指定，后两参数必填 mode 2 单方调整，与sidebar高度做比
     console.log('<----高度调整模块动作---->')
-    // console.log('拦截标识符:'+intercept)
-    // if (intercept===1){
-    //     console.log('确认拦截，解析到的推送id:'+get('postId'));
-    //     if (get('postId')!== null) {
-    //         apppost.openPost();
-    //         return;
-    //     }
-    // }
-    // console.log('debug:');
-    // console.log(dropDownControl.drops);
     switch(mode){
         case 0:{
             console.log('自动根据id调整高度')
@@ -66,7 +56,6 @@ function setHeight(mode,Arg1,Arg2,idOne,idTwo) {//mode 0 以id为根据调整 mo
                 console.log('应设置高度:'+objSide.offsetHeight + "px");
                 console.log('设置容器高度:'+objContent.offsetHeight);
                 }
-                // apppost.contentShow = false;
                 console.log("页面高度已调整");
                 return;
         }
@@ -75,10 +64,11 @@ function setHeight(mode,Arg1,Arg2,idOne,idTwo) {//mode 0 以id为根据调整 mo
     }
 
 function realtime(){
-    console.log('<----控件实时显示状态:---->')
+    console.log('<----控件实时显示状态(仅加载时):---->')
     console.log('apppost(文章列表):'+apppost.listShow)
     console.log('postControl(文章详情):'+postControl.show)
     console.log('pageControl(页面打开):'+pageControl.show)
+    console.log('暗黑模式状态:'+darkmode.isActivated())
 }
 
 function dynamicChangeHeight(){
@@ -113,15 +103,18 @@ var apppost = new Vue({
         contentShow : false,
         listShow : true,
         showId : '1',
-        // defaultAdress : './index.html',
-        posts: []
+        posts: [{
+            id : "err",
+            title : "请在线使用本网站！",
+            briefcon : "由于跨域限制，请在dev.lzxweb.com访问本站，谢谢！"
+        }]
      },
      created(){
         let myHeaders = new Headers({
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'text/plain'
         });
-        fetch('http://dev.lzxweb.com/articles/posts/postlist.json',{
+        fetch('http://dev.lzxweb.com/ZCMS/articles/posts/postlist.json',{
             headers:myHeaders})//设置跨域请求，本地调试用，若部署到服务端建议删除本行代码
             .then( Response=> Response.json())
             .then(json => {
@@ -174,7 +167,7 @@ var postControl = new Vue({
     },
     methods: {
         Openpost: function(id){
-            fetch('http://dev.lzxweb.com/articles/posts/posts.json')
+            fetch('http://dev.lzxweb.com/ZCMS/articles/posts/posts.json')
                 .then( Response=> Response.json())
                 .then(json => {
                 this.posts = json
@@ -211,62 +204,40 @@ var pageControl = new Vue({
             // 利用JQuery调用外部网页，重新渲染文章列表作为外部用
             apppost.listShow = false;
             postControl.show = false;
-            // this.show = false;
-            // document.getElementById('contenth').style.height = "0px";
-            // document.getElementById('postArea').style.height= '0px';
-            // document.getElementById('pageDisplay').style.height= '0px';
             this.show = true;
             console.log('页面框架渲染完成')
-            // $('#pageDisplay').load('./articles/pages/'+id+'.html')
-            console.log('页面加载完成')
             new Promise(function (resolve,reject){
-                
                 this.show = false;
                 resolve();
             })
             .then(function(){
-                //  console.log(document.getElementById('external'))
                 this.show = true;
             })
             .then(function(){
+               
                 $('#pageDisplay').load('./articles/pages/'+id+'.html')
                 console.log('get("cl"):'+get("cl")+'类型:'+typeof(get("cl")));
+                // if (id==='weather'){
+                //     document.getElementsByClassName('top-navbar').style.
+                // }
                 if ((get("cl")==='0')&&get("pageId")==='6'){
-                    // let refreshCounter = get("cl");
-                    // if (refreshCounter === '1'){
-                    //     refreshCounter = '2'
-                    // }
-                    // if (refreshCounter === '0'){
-                    //     refreshCounter = '1';
-                    // }
                     let urlCurrent = location.href;
                     let changedUrl = changeURLArg(urlCurrent,"cl",'1')
                     if (!!(window.history && history.pushState)) {
                         history.replaceState(null, "", changedUrl);
                     }
-                    setTimeout(document.location.reload(),1000)
+                    window.location.reload(true)
+                }
+                if ((get("cl")==='0')&&get("pageId")==='weather'){
+                    let urlCurrent = location.href;
+                    let changedUrl = changeURLArg(urlCurrent,"cl",'1')
+                    if (!!(window.history && history.pushState)) {
+                        history.replaceState(null, "", changedUrl);
+                    }
                     
                 }
-                
-
-                // externalSetHeight();
             } )
-            // let pageload = function (){
-            //     $('#pageDisplay').load('./articles/pages/'+id+'.html')
-            // }
-            // pageload().then(function(){
-            //     externalSetHeight();
-            // })
-            // setTimeout(externalSetHeight(),50);
-            // let externalId= document.getElementById('externalh')
-            // console.log('在index.js获取到的高度:'+externalId.offsetHeight)
-
-            // this.$nextTick(()=>{
-            //     externalSetHeight(externalId.offsetHeight)
-            // })
-            
             console.log('本次调整来源于打开页面自动调整')
-            // setHeight(0,'pageDisplay','sidebarh','','')
             realtime();
         }
     }
@@ -279,6 +250,7 @@ function get(keyword) {
 	if (r != null) return unescape(r[2]); return null;   //注意此处参数是中文，解码使用的方法是unescape ，那么在传值的时候如果是中文，需要使用escape('曲浩')方法来编码。
 }
 
+//变更地址栏变量函数
 function changeURLArg(url, arg, arg_val) {
     var pattern = arg + '=([^&]*)';
     var replaceText = arg + '=' + arg_val;
@@ -296,12 +268,8 @@ function changeURLArg(url, arg, arg_val) {
 }
 
 
-
-var Query=function(a){"use strict";var b=function(a){var b=[],c,d,e,f;if(typeof a=="undefined"||a===null||a==="")return b;a.indexOf("?")===0&&(a=a.substring(1)),d=a.toString().split(/[&;]/);for(c=0;c<d.length;c++)e=d[c],f=e.split("="),b.push([f[0],f[1]]);return b},c=b(a),d=function(){var a="",b,d;for(b=0;b<c.length;b++)d=c[b],a.length>0&&(a+="&"),a+=d.join("=");return a.length>0?"?"+a:a},e=function(a){a=decodeURIComponent(a),a=a.replace("+"," ");return a},f=function(a){var b,d;for(d=0;d<c.length;d++){b=c[d];if(e(a)===e(b[0]))return b[1]}},g=function(a){var b=[],d,f;for(d=0;d<c.length;d++)f=c[d],e(a)===e(f[0])&&b.push(f[1]);return b},h=function(a,b){var d=[],f,g,h,i;for(f=0;f<c.length;f++)g=c[f],h=e(g[0])===e(a),i=e(g[1])===e(b),(arguments.length===1&&!h||arguments.length===2&&!h&&!i)&&d.push(g);c=d;return this},i=function(a,b,d){arguments.length===3&&d!==-1?(d=Math.min(d,c.length),c.splice(d,0,[a,b])):arguments.length>0&&c.push([a,b]);return this},j=function(a,b,d){var f=-1,g,j;if(arguments.length===3){for(g=0;g<c.length;g++){j=c[g];if(e(j[0])===e(a)&&decodeURIComponent(j[1])===e(d)){f=g;break}}h(a,d).addParam(a,b,f)}else{for(g=0;g<c.length;g++){j=c[g];if(e(j[0])===e(a)){f=g;break}}h(a),i(a,b,f)}return this};return{getParamValue:f,getParamValues:g,deleteParam:h,addParam:i,replaceParam:j,toString:d}},Uri=function(a){"use strict";var b=!1,c=function(a){var c={strict:/^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,loose:/^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/},d=["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],e={name:"queryKey",parser:/(?:^|&)([^&=]*)=?([^&]*)/g},f=c[b?"strict":"loose"].exec(a),g={},h=14;while(h--)g[d[h]]=f[h]||"";g[e.name]={},g[d[12]].replace(e.parser,function(a,b,c){b&&(g[e.name][b]=c)});return g},d=c(a||""),e=new Query(d.query),f=function(a){typeof a!="undefined"&&(d.protocol=a);return d.protocol},g=null,h=function(a){typeof a!="undefined"&&(g=a);return g===null?d.source.indexOf("//")!==-1:g},i=function(a){typeof a!="undefined"&&(d.userInfo=a);return d.userInfo},j=function(a){typeof a!="undefined"&&(d.host=a);return d.host},k=function(a){typeof a!="undefined"&&(d.port=a);return d.port},l=function(a){typeof a!="undefined"&&(d.path=a);return d.path},m=function(a){typeof a!="undefined"&&(e=new Query(a));return e},n=function(a){typeof a!="undefined"&&(d.anchor=a);return d.anchor},o=function(a){f(a);return this},p=function(a){h(a);return this},q=function(a){i(a);return this},r=function(a){j(a);return this},s=function(a){k(a);return this},t=function(a){l(a);return this},u=function(a){m(a);return this},v=function(a){n(a);return this},w=function(a){return m().getParamValue(a)},x=function(a){return m().getParamValues(a)},y=function(a,b){arguments.length===2?m().deleteParam(a,b):m().deleteParam(a);return this},z=function(a,b,c){arguments.length===3?m().addParam(a,b,c):m().addParam(a,b);return this},A=function(a,b,c){arguments.length===3?m().replaceParam(a,b,c):m().replaceParam(a,b);return this},B=function(){var a="",b=function(a){return a!==null&&a!==""};b(f())?(a+=f(),f().indexOf(":")!==f().length-1&&(a+=":"),a+="//"):h()&&b(j())&&(a+="//"),b(i())&&b(j())&&(a+=i(),i().indexOf("@")!==i().length-1&&(a+="@")),b(j())&&(a+=j(),b(k())&&(a+=":"+k())),b(l())?a+=l():b(j())&&(b(m().toString())||b(n()))&&(a+="/"),b(m().toString())&&(m().toString().indexOf("?")!==0&&(a+="?"),a+=m().toString()),b(n())&&(n().indexOf("#")!==0&&(a+="#"),a+=n());return a},C=function(){return new Uri(B())};return{protocol:f,hasAuthorityPrefix:h,userInfo:i,host:j,port:k,path:l,query:m,anchor:n,setProtocol:o,setHasAuthorityPrefix:p,setUserInfo:q,setHost:r,setPort:s,setPath:t,setQuery:u,setAnchor:v,getQueryParamValue:w,getQueryParamValues:x,deleteQueryParam:y,addQueryParam:z,replaceQueryParam:A,toString:B,clone:C}},jsUri=Uri;
-
 //侧边栏时间显示
 function clock(){
-    // console.log('时间刷新')
     var time=new Date();
     var week;
     switch (time.getDay()){   
@@ -352,12 +320,35 @@ var msg="欢迎光临我的博客!";//声明一个变量。
 var interval = 300;//声明一个变量，设置一个时间间隔为300毫秒。
 seq = 0;//赋给seq初值为0。
 function Scroll() {//定义一个函数。
-    // console.log('跑马灯跑')
     len = msg.length;
-    // window.status = msg.substring(0, seq+1);
     document.getElementById('Pmd').innerHTML = msg.substring(0, seq+1);
     seq++;
 /*len的值为字符串msg的长度，在状态栏上显示msg的第一到第seq+个字符，seq每次递加。*/
 if ( seq >= len ) { seq = 0 };/*当seq的长度大于等于msg的字符长度时，seq=0。*/
 //每300毫秒调用一次Scroll函数，即每300毫秒出一个字。
 }
+
+
+//功能预留
+function toggleTheme() {
+    // Obtains an array of all <link>
+    // elements.
+    // Select your element using indexing.
+    var theme = document.getElementsByTagName('link')[0];
+
+    // Change the value of href attribute 
+    // to change the css sheet.
+    if (theme.getAttribute('href') == './css/index.css') {
+        theme.setAttribute('href', './css/indexDarkTheme.css');
+    } else {
+        theme.setAttribute('href', './css/index.css');
+    }
+}
+//baidu页面分析代码
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?dea5c7d1ba45cab78e5346b76d027c15";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();

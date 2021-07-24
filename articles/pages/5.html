@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/externalPages.css">
+    <link rel="stylesheet" href="/ZCMS/css/externalPages.css">
 </head>
 <body>
     <div id="external">
         <div class="title">本站技术解析-JS部分</div>
         <div class="contentDivider"></div>
         <div class="content">
-            <p>这部分是本站技术解析-JS部分，该部分涉及内容众多，具体JS内容可直接查看Javascript文件配合本文理解。目前还在在线开发阶段，可能会有大段的注释代码，请注意分辨。</p>
+            <p>这部分是本站技术解析-JS部分，该部分涉及内容众多，具体JS内容可直接查看Javascript文件配合本文理解。目前还在在线开发阶段，可能会有大段的注释代码，请注意分辨。注：本解析内容可能会与当前网站内容落后，具体技术细节请以网站当前版本为准。</p>
             <p>本站涉及到了5个主要Js文件，分别为index.js、detect.js、externalPages.js、vue.js。还有iview.js由于基本未使用不做介绍。下面是各个js分别的简短介绍。</p>
             <p>index.js：为本站核心，包含了setHeight函数、realtime函数、dynamicChangeHeight函数、intercept函数、get函数。包含了多个vue组件:apppost（文章列表）、postControl（文章详情页）、pageControl（页面显示控件），这些内容会在下面详细介绍。</p>
             <p>setHeight函数：关键函数，确保了中间部分左右两栏高度一致，函数头：function setHeight(mode,Arg1,Arg2,idOne,idTwo)，mode解释：mode 0 以id为根据调整 mode 1 以绝对高度指定，后两参数必填 mode 2 单方调整，与sidebar高度做比。其他参数按mode值按需传递从而分别实现对应功能。</p>
@@ -46,6 +46,6 @@
     document.title = '刘祚先的个人博客-本站技术解析-JS部分'
     externalSetHeight();
 </script>
-<script src="../../js/detect.js"></script>
-<script src="../../js/externalPages.js"></script>
+<script src="/ZCMS/js/detect.js"></script>
+<script src="/ZCMS/js/externalPages.js"></script>
 </html>
